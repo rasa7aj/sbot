@@ -712,7 +712,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'ذخیره لینک' then
+    elseif matches[1] == 'ادرس' then
         if permissions(msg.from.id, msg.to.id, "setlink") then
             hash = 'link:'..msg.to.id
             redis:set(hash, matches[2])
@@ -725,7 +725,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'لینک جدید' then
+    elseif matches[1] == 'تعویض' then
         if permissions(msg.from.id, msg.to.id, "setlink") then
         	local receiver = get_receiver(msg)
             local hash = 'link:'..msg.to.id
@@ -774,7 +774,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'عکس جدید' then
+    elseif matches[1] == 'تصویر' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             hash = 'setphoto:'..msg.to.id
             if redis:get(hash) then
@@ -844,7 +844,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'سکوت باز' then
+    elseif matches[1] == 'باز' then
     	if permissions(msg.from.id, msg.to.id, "muteall") then
     		local hash = 'muteall:'..msg.to.id
     		redis:del(hash)
@@ -852,7 +852,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'گروه جدید' and matches[2] then
+    elseif matches[1] == 'ساخت' and matches[2] then
 		if permissions(msg.from.id, msg.to.id, "creategroup") then
 	            group_name = matches[2]
 		    return create_group(msg, group_name)
@@ -869,17 +869,17 @@ return {
  '^(settings) (.*) (.*)$',        
  '^(حذف)$',
  '^(اسم) (.*)$',
- '^(عکس جدید)$',
+ '^(تصویر)$',
  '^(setphoto) (.*)$',
  '^(سکوت)$',
  '^(سکوت) (.*)$',
- '^(سکوت باز)$',
+ '^(باز)$',
  '^(لینک)$',
  "^(ارتقا)$",
  "^(setdescription) (.*)$",
- '^(لینک جدید) (.*)$',
+ '^(تعویض) (.*)$',
  '^(زبان) (.*)$',
- '^(گروه جدید) (.*)$',
+ '^(ساخت) (.*)$',
 	'^!!tgservice (.+)$'
 },
 	pre_process = pre_process,
