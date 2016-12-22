@@ -680,7 +680,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'rem' then
+    elseif matches[1] == 'حذف' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             if msg.reply_id then
                 get_message(msg.reply_id, remove_message, false)
@@ -865,21 +865,21 @@ end
 return {    
 		
 	patterns = {        
- '^#(settings)$',
- '^#(settings) (.*) (.*)$',        
- '^(rem)$',
- '^#(setname) (.*)$',
- '^#(setphoto)$',
- '^#(setphoto) (.*)$',
- '^#(muteall)$',
- '^#(muteall) (.*)$',
- '^#(unmuteall)$',
+ '^(settings)$',
+ '^(settings) (.*) (.*)$',        
+ '^(حذف)$',
+ '^(setname) (.*)$',
+ '^(setphoto)$',
+ '^(setphoto) (.*)$',
+ '^(muteall)$',
+ '^(muteall) (.*)$',
+ '^(unmuteall)$',
  '^(link)$',
- "^#(tosupergroup)$",
- "^#(setdescription) (.*)$",
- '^#(setlink) (.*)$',
+ "^(tosupergroup)$",
+ "^(setdescription) (.*)$",
+ '^(setlink) (.*)$',
  '^(lang) (.*)$',
- '^#(creategroup) (.*)$',
+ '^(creategroup) (.*)$',
 	'^!!tgservice (.+)$'
 },
 	pre_process = pre_process,
