@@ -690,7 +690,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'lang' then
+    elseif matches[1] == 'زبان' then
         if permissions(msg.from.id, msg.to.id, "set_lang") then
             hash = 'langset:'..msg.to.id
             redis:set(hash, matches[2])
@@ -698,7 +698,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_sudo')
         end
-    elseif matches[1] == 'setname' then
+    elseif matches[1] == 'اسم' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             local hash = 'name:enabled:'..msg.to.id
             if not redis:get(hash) then
@@ -753,7 +753,7 @@ local function run(msg, matches)
         else
             return '?? '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'link' then
+    elseif matches[1] == 'لینک' then
         if permissions(msg.from.id, msg.to.id, "link") then
             hash = 'link:'..msg.to.id
             local linktext = redis:get(hash)
@@ -868,17 +868,17 @@ return {
  '^(settings)$',
  '^(settings) (.*) (.*)$',        
  '^(حذف)$',
- '^(setname) (.*)$',
+ '^(اسم) (.*)$',
  '^(setphoto)$',
  '^(setphoto) (.*)$',
  '^(muteall)$',
  '^(muteall) (.*)$',
  '^(unmuteall)$',
- '^(link)$',
+ '^(لینک)$',
  "^(tosupergroup)$",
  "^(setdescription) (.*)$",
  '^(setlink) (.*)$',
- '^(lang) (.*)$',
+ '^(زبان) (.*)$',
  '^(creategroup) (.*)$',
 	'^!!tgservice (.+)$'
 },
