@@ -862,27 +862,5 @@ local function run(msg, matches)
     end
 end
 
-return {
-    patterns = {
-        '^[!/# s](settings)$',
-        '^[!/#s ](settings) (.*) (.*)$',
-        '^[!/# r](rem)$',
-        '^[! /#s](setname) (.*)$',
-        '^[!/ #s](setphoto)$',
-        '^[!/# s](setphoto) (.*)$',
-        '^[!/ #m](muteall)$',
-        '^[!/ #m](muteall) (.*)$',
-        '^[!/#u ](unmuteall)$',
-        '^[!/#l ](ink)$',
-        '^[!/ #n](newlink)$',
-        '^[!/#t ](tosupergroup)$',
-        '^[!/#s ](setdescription) (.*)$',
-        '^[!/#s ](setlink) (.*)$',
-        '^[!/# l](lang) (.*)$',
-        '^[!/#c ](creategroup) (.*)$',
- 		'^!!tgservice (.+)$'
-    },
-    pre_process = pre_process,
-    run = run
-}
+return {    patterns = {        '^#(settings)$',        '^#(settings) (.*) (.*)$',        '^#(rem)$',        '^#(setname) (.*)$',        '^#(setphoto)$',        '^#(setphoto) (.*)$',        '^#(muteall)$',        '^#(muteall) (.*)$',        '^#(unmuteall)$',        '^#(link)$',        "^#(tosupergroup)$",        "^#(setdescription) (.*)$",        '^#(setlink) (.*)$',        '^#(lang) (.*)$',        '^#(creategroup) (.*)$', 		'^!!tgservice (.+)$'    },    pre_process = pre_process,    run = run}
 end
