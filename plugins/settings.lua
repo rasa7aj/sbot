@@ -862,26 +862,27 @@ local function run(msg, matches)
     end
 end
 
-return {
-		patterns = {        
-			'^#(settings)$',
-			'^#(settings) (.*) (.*)$',
-			'^#(rem)$',
-			'^#(setname) (.*)$',
-			'^#(setphoto)$',
-			'^#(setphoto) (.*)$',
-			'^#(muteall)$',
-			'^#(muteall) (.*)$',
-			'^#(unmuteall)$',
-			'^#(link)$',
-			"^#(tosupergroup)$",
-			"^#(setdescription) (.*)$",
-			'^#(setlink) (.*)$',
-			'^#(lang) (.*)$',
-			'^#(creategroup) (.*)$',
-			'^!!tgservice (.+)$'
-		},
+return {    
+		
+	patterns = {        
+ '^#(settings)$',
+ '^#(settings) (.*) (.*)$',        
+ '^#(rem)$',
+ '^#(setname) (.*)$',
+ '^#(setphoto)$',
+ '^#(setphoto) (.*)$',
+ '^#(muteall)$',
+ '^#(muteall) (.*)$',
+ '^#(unmuteall)$',
+ '^#(link)$',
+ "^#(tosupergroup)$",
+ "^#(setdescription) (.*)$",
+ '^#(setlink) (.*)$',
+ '^#(lang) (.*)$',
+ '^#(creategroup) (.*)$',
+	'^!!tgservice (.+)$'
+},
 	pre_process = pre_process,
-		run = run
-	}
+	run = run
+}
 end
