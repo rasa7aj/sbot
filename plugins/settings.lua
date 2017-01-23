@@ -680,7 +680,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'حذف' then
+    elseif matches[1] == 'rem' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             if msg.reply_id then
                 get_message(msg.reply_id, remove_message, false)
@@ -690,7 +690,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'زبان' then
+    elseif matches[1] == 'lang' then
         if permissions(msg.from.id, msg.to.id, "set_lang") then
             hash = 'langset:'..msg.to.id
             redis:set(hash, matches[2])
@@ -698,7 +698,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_sudo')
         end
-    elseif matches[1] == 'اسم' then
+    elseif matches[1] == 'setname' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             local hash = 'name:enabled:'..msg.to.id
             if not redis:get(hash) then
@@ -712,7 +712,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'ادرس' then
+    elseif matches[1] == 'setlink' then
         if permissions(msg.from.id, msg.to.id, "setlink") then
             hash = 'link:'..msg.to.id
             redis:set(hash, matches[2])
@@ -725,7 +725,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'تعویض' then
+    elseif matches[1] == 'newlink' then
         if permissions(msg.from.id, msg.to.id, "setlink") then
         	local receiver = get_receiver(msg)
             local hash = 'link:'..msg.to.id
@@ -753,7 +753,7 @@ local function run(msg, matches)
         else
             return '?? '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'لینک' then
+    elseif matches[1] == 'link' then
         if permissions(msg.from.id, msg.to.id, "link") then
             hash = 'link:'..msg.to.id
             local linktext = redis:get(hash)
@@ -774,7 +774,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'تصویر' then
+    elseif matches[1] == 'setphoto' then
         if permissions(msg.from.id, msg.to.id, "settings") then
             hash = 'setphoto:'..msg.to.id
             if redis:get(hash) then
@@ -802,7 +802,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_mod')
         end
-    elseif matches[1] == 'ارتقا' then
+    elseif matches[1] == 'tosupergroup' then
         if msg.to.type == 'chat' then
             if permissions(msg.from.id, msg.to.id, "tosupergroup") then
                 chat_upgrade('chat#id'..msg.to.id, ok_cb, false)
@@ -826,7 +826,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'سکوت' and matches[2] then
+    elseif matches[1] == 'muteall' and matches[2] then
     	if permissions(msg.from.id, msg.to.id, "muteall") then
     		print(1)
     		local hash = 'muteall:'..msg.to.id
@@ -836,7 +836,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'سکوت' then
+    elseif matches[1] == 'muteall' then
     	if permissions(msg.from.id, msg.to.id, "muteall") then
     		local hash = 'muteall:'..msg.to.id
     		redis:set(hash, true)
@@ -844,7 +844,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'باز' then
+    elseif matches[1] == 'unmuteall' then
     	if permissions(msg.from.id, msg.to.id, "muteall") then
     		local hash = 'muteall:'..msg.to.id
     		redis:del(hash)
@@ -852,7 +852,7 @@ local function run(msg, matches)
         else
             return '🚫 '..lang_text(msg.to.id, 'require_admin')
         end
-    elseif matches[1] == 'ساخت' and matches[2] then
+    elseif matches[1] == 'creategroup' and matches[2] then
 		if permissions(msg.from.id, msg.to.id, "creategroup") then
 	            group_name = matches[2]
 		    return create_group(msg, group_name)
@@ -862,27 +862,27 @@ local function run(msg, matches)
     end
 end
 
-return {    
-		
-	patterns = {        
- '^(settings)$',
- '^(settings) (.*) (.*)$',        
- '^(حذف)$',
- '^(اسم) (.*)$',
- '^(تصویر)$',
- '^(setphoto) (.*)$',
- '^(سکوت)$',
- '^(سکوت) (.*)$',
- '^(باز)$',
- '^(لینک)$',
- "^(ارتقا)$",
- "^(setdescription) (.*)$",
- '^(تعویض) (.*)$',
- '^(زبان) (.*)$',
- '^(ساخت) (.*)$',
-	'^!!tgservice (.+)$'
-},
-	pre_process = pre_process,
-	run = run
+return {
+    patterns = {
+        '^[!/#](settings)$',
+        '^[!/#](settings) (.*) (.*)$',
+        '^[!/#r](em)$',
+        '^[!/#](setname) (.*)$',
+        '^[!/#](setphoto)$',
+        '^[!/#](setphoto) (.*)$',
+        '^[!/#](muteall)$',
+        '^[!/#](muteall) (.*)$',
+        '^[!/#](unmuteall)$',
+        '^[!/#](link)$',
+        '^[!/#](newlink)$',
+        '^[!/#](tosupergroup)$',
+        '^[!/#](setdescription) (.*)$',
+        '^[!/#](setlink) (.*)$',
+        '^[!/#](lang) (.*)$',
+        '^[!/#](creategroup) (.*)$',
+ 		'^!!tgservice (.+)$'
+    },
+    pre_process = pre_process,
+    run = run
 }
 end
